@@ -39,7 +39,11 @@ public:
   virtual int64_t       Seek(int64_t pos, int whence=SEEK_SET);
   virtual int64_t       GetPosition();
   virtual int64_t       GetLength();
-  virtual int           Stat(const CURL& url, struct __stat64* buffer) { return -1; }
+  virtual int           Stat(const CURL& url, struct __stat64* buffer) {
+	  memset(buffer, 0, sizeof(struct __stat64));
+	  buffer->st_size = 0;
+	  return 0;
+  }
   virtual void          Close();
   virtual ssize_t       Read(void* buffer, size_t size);
   virtual std::string   GetContent()                                   { return ""; }
