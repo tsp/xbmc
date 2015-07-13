@@ -83,7 +83,8 @@ NPT_Result
 NPT_XbmcFileStream::Seek(NPT_Position offset)
 {
     int64_t result;
-
+	if (offset > 0xffffffffffff)
+		offset = 0;
     result = m_FileReference->Seek(offset, SEEK_SET)    ;
     if (result >= 0) {
         return NPT_SUCCESS;

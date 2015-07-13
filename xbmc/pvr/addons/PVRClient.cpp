@@ -1354,7 +1354,9 @@ int64_t CPVRClient::GetStreamLength(void)
 {
   if (IsPlayingLiveStream())
   {
-    try { return m_pStruct->LengthLiveStream(); }
+	  try {
+		  return -1;
+		return m_pStruct->LengthLiveStream(); }
     catch (std::exception &e) { LogException(e, "LengthLiveStream()"); }
   }
   else if (IsPlayingRecording())
